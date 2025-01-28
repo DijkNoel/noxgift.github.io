@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All U Need Is Love</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/style.css">
+    <script src="src/animation.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.0/lottie.min.js"></script>
+</head>
+<body class="loading">
+    <svg class="corner-heart top-left" width="200" height="200" viewBox="0 0 800 800">
+        <path d="M400 632C400 632 140 456 140 302C140 194 228 140 310 140C364 140 400 170 400 170C400 170 436 140 490 140C572 140 660 194 660 302C660 456 400 632 400 632Z" fill="#4a125922"/>
+    </svg>
+    
+    <svg class="corner-heart bottom-right" width="200" height="200" viewBox="0 0 800 800">
+        <path d="M400 632C400 632 140 456 140 302C140 194 228 140 310 140C364 140 400 170 400 170C400 170 436 140 490 140C572 140 660 194 660 302C660 456 400 632 400 632Z" fill="#4a125922"/>
+    </svg>
+
+    <div class="container">
+        <div class="content">
+            <div class="text-content">
+                <h1>ALL U<br>NEED IS<br><span class="highlight">LOVE</span> </h1>
+                <p class="message">
+                    Like spider lilies that bloom in autumn,<br>
+                    Some moments are fleeting yet beautiful.
+                </p>
+                <p class="heartfelt-message">
+                    "In the garden of life, love is the most beautiful flower that blooms eternally."
+                </p>
+                <button class="find-btn">Find It!</button>
+            </div>
+            <div class="image-content">
+                <img src="images/couple.png" alt="Couple illustration" class="main-image">
+            </div>
+        </div>
+    </div>
+
+    <div class="music-player">
+        <audio id="background-music" src="music/aizen-yokoso-full.mp3"></audio>
+        <div class="controls">
+            <button id="playPause" class="control-btn">
+                <span class="play-icon">♪</span>
+                <span class="pause-icon hidden">⏸</span>
+            </button>
+            <input type="range" id="volume" min="0" max="100" value="50">
+        </div>
+    </div>
+
+    <div class="notification">
+        <div class="notification-icon">🎵</div>
+        <div class="notification-text">
+            Click the music button to play some music!<br>
+            I chose this song because it's your favorite<3
+        </div>
+        <button class="notification-close">×</button>
+    </div>
+
+    <div class="video-overlay">
+        <video id="fullscreen-video" src="video/sigma.mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+
+    <div class="video-notification">
+        <span class="video-notification-icon">⌨️</span>
+        <span>Press ESC to close video</span>
+    </div>
+</body>
+</html>

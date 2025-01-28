@@ -1,0 +1,148 @@
+// Lottie Animation
+lottie.loadAnimation({
+    container: document.getElementById('heart-animation'),
+    renderer: 'svg',
+    loop: true,
+    autoplay: true,
+    path: 'lottie-anim/heart.json'
+});
+
+// Music Player Controls
+const audio = document.getElementById('background-music');
+const playPauseBtn = document.getElementById('playPause');
+const volumeSlider = document.getElementById('volume');
+const playIcon = document.querySelector('.play-icon');
+const pauseIcon = document.querySelector('.pause-icon');
+
+playPauseBtn.addEventListener('click', () => {
+    if (audio.paused) {
+        audio.play();
+        playIcon.classList.add('hidden');
+        pauseIcon.classList.remove('hidden');
+    } else {
+        audio.pause();
+        playIcon.classList.remove('hidden');
+        pauseIcon.classList.add('hidden');
+    }
+});
+
+volumeSlider.addEventListener('input', (e) => {
+    audio.volume = e.target.value / 100;
+});
+
+// Set initial volume
+audio.volume = volumeSlider.value / 100;
+
+// Add loading state handler
+document.addEventListener('DOMContentLoaded', () => {
+    document.body.classList.remove('loading');
+    document.body.classList.add('loaded');
+    
+    const notification = document.querySelector('.notification');
+    const closeNotification = document.querySelector('.notification-close');
+    
+    // Show notification
+    setTimeout(() => {
+        notification.classList.add('show');
+    }, 500);
+
+    // Handle notification close
+    closeNotification.addEventListener('click', () => {
+        notification.classList.add('hide');
+        setTimeout(() => {
+            notification.style.display = 'none';
+        }, 500);
+    });
+
+    // Auto-hide notification after 6 seconds
+    setTimeout(() => {
+        if (!notification.classList.contains('hide')) {
+            notification.classList.add('hide');
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 500);
+        }
+    }, 6000);
+});
+
+// Add smooth scroll for navigation
+document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const href = link.getAttribute('href');
+        if (href !== '#') {
+            window.scrollTo({
+                top: document.querySelector(href).offsetTop - 100,
+                behavior: 'smooth'
+            });
+        }
+    });
+});
+
+// Add music player interaction hint
+const musicPlayer = document.querySelector('.music-player');
+const controlBtn = document.querySelector('.control-btn');
+
+controlBtn.addEventListener('mouseenter', () => {
+    musicPlayer.style.transform = 'translateX(-50%) scale(1.05)';
+});
+
+controlBtn.addEventListener('mouseleave', () => {
+    musicPlayer.style.transform = 'translateX(-50%) scale(1)';
+});
+
+// Add this to your existing JavaScript
+const findBtn = document.querySelector('.find-btn');
+const videoOverlay = document.querySelector('.video-overlay');
+const video = document.querySelector('#fullscreen-video');
+const videoNotification = document.querySelector('.video-notification');
+
+findBtn.addEventListener('click', () => {
+    videoOverlay.classList.add('active');
+    video.play();
+    
+    // Show notification
+    setTimeout(() => {
+        videoNotification.classList.add('show');
+    }, 1000);
+
+    // Hide notification after 4 seconds
+    setTimeout(() => {
+        videoNotification.classList.remove('show');
+    }, 5000);
+    
+    // Disable music if it's playing
+    if (!audio.paused) {
+        audio.pause();
+        playIcon.classList.remove('hidden');
+        pauseIcon.classList.add('hidden');
+    }
+});
+
+// Function to close video
+function closeVideo() {
+    video.pause();
+    video.currentTime = 0;
+    videoOverlay.style.opacity = '0';
+    videoNotification.classList.remove('show');
+    setTimeout(() => {
+        videoOverlay.classList.remove('active');
+        videoOverlay.style.opacity = '';
+    }, 500);
+}
+
+video.addEventListener('ended', closeVideo);
+
+// Update keyboard support
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && videoOverlay.classList.contains('active')) {
+        closeVideo();
+    }
+});
+
+// Add video overlay click to close
+videoOverlay.addEventListener('click', (e) => {
+    if (e.target === videoOverlay) {
+        closeVideo();
+    }
+});

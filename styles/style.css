@@ -1,0 +1,512 @@
+:root {
+    --accent-color: #4a1259;
+    --text-color: #333;
+    --light-text: #666;
+    --background-color: #ffffff;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    background-color: var(--background-color);
+    background-image: url('../images/big-heart.svg');
+    background-size: 1200px;
+    background-position: right -100px center;
+    background-repeat: no-repeat;
+    font-family: 'Poppins', sans-serif;
+    color: var(--text-color);
+    overflow-x: hidden;
+    overflow: hidden;
+}
+
+.corner-heart {
+    position: fixed;
+    opacity: 0.8;
+    z-index: -1;
+}
+
+.corner-heart.top-left {
+    top: -50px;
+    left: -50px;
+    transform: rotate(-15deg);
+    animation: floatTopLeft 6s ease-in-out infinite;
+}
+
+.corner-heart.bottom-right {
+    bottom: -50px;
+    right: -50px;
+    transform: rotate(15deg);
+    animation: floatBottomRight 6s ease-in-out infinite;
+}
+
+@keyframes floatTopLeft {
+    0%, 100% { transform: rotate(-15deg) translate(0, 0); }
+    50% { transform: rotate(-15deg) translate(10px, 10px); }
+}
+
+@keyframes floatBottomRight {
+    0%, 100% { transform: rotate(15deg) translate(0, 0); }
+    50% { transform: rotate(15deg) translate(-10px, -10px); }
+}
+
+.container {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    padding: 2rem;
+}
+
+.content {
+    max-width: 1200px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 2rem;
+    background: transparent;
+}
+
+.text-content {
+    flex: 1;
+    padding-right: 6rem;
+    z-index: 2;
+    margin-left: 8%;
+}
+
+.image-content {
+    flex: 1;
+    position: relative;
+}
+
+h1 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 5rem;
+    margin-bottom: 2rem;
+    color: var(--text-color);
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    padding: 1rem 0;
+    text-align: left;
+    width: 450px;
+}
+
+.highlight {
+    color: var(--accent-color);
+    position: relative;
+    display: inline-block;
+}
+
+.highlight::after {
+    content: '♥';
+    position: absolute;
+    font-size: 2rem;
+    right: -30px;
+    top: 10px;
+    color: var(--accent-color);
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+.message {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+    font-size: 1.2rem;
+    line-height: 1.8;
+    color: var(--light-text);
+    margin: 3rem 0;
+    max-width: 80%;
+}
+
+.heartfelt-message {
+    font-style: italic;
+    color: var(--accent-color);
+    margin-top: 2rem;
+    margin-bottom: 3rem;
+    max-width: 80%;
+    font-size: 1.1rem;
+    opacity: 0.9;
+}
+
+/* Updated Music Player Styles */
+.music-player {
+    position: fixed;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255, 255, 255, 0.95);
+    padding: 1.2rem 2rem;
+    border-radius: 50px;
+    box-shadow: 0 5px 20px rgba(74, 18, 89, 0.15);
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(74, 18, 89, 0.1);
+    animation: slideUp 0.8s ease forwards;
+}
+
+.control-btn {
+    background: var(--accent-color);
+    border: none;
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.control-btn::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    top: 0;
+    left: -100%;
+    transition: all 0.3s ease;
+}
+
+.control-btn:hover::before {
+    left: 0;
+}
+
+.control-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 15px rgba(74, 18, 89, 0.3);
+}
+
+#volume {
+    width: 120px;
+    height: 5px;
+    accent-color: var(--accent-color);
+    cursor: pointer;
+}
+
+#volume::-webkit-slider-thumb {
+    width: 15px;
+    height: 15px;
+    background: var(--accent-color);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+#volume::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+}
+
+@keyframes slideUp {
+    from {
+        transform: translate(-50%, 100px);
+        opacity: 0;
+    }
+    to {
+        transform: translate(-50%, 0);
+        opacity: 1;
+    }
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+}
+
+.hidden {
+    display: none;
+}
+
+/* Notification styles */
+.notification {
+    position: fixed;
+    bottom: 120px;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    background: rgba(255, 255, 255, 0.98);
+    padding: 1.2rem 2rem;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(74, 18, 89, 0.15);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(74, 18, 89, 0.1);
+    opacity: 0;
+    z-index: 1000;
+    pointer-events: none;
+}
+
+.notification.show {
+    animation: notificationSlideUp 0.8s ease forwards;
+    animation-delay: 1.5s;
+}
+
+.notification.hide {
+    animation: notificationSlideDown 0.5s ease forwards;
+}
+
+.notification-icon {
+    color: var(--accent-color);
+    font-size: 1.5rem;
+}
+
+.notification-text {
+    color: var(--text-color);
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+.notification-close {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: none;
+    border: none;
+    color: var(--light-text);
+    cursor: pointer;
+    font-size: 1.2rem;
+    padding: 4px;
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+}
+
+.notification-close:hover {
+    opacity: 1;
+}
+
+@keyframes notificationSlideUp {
+    from {
+        transform: translateX(-50%) translateY(100px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(-50%) translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes notificationSlideDown {
+    from {
+        transform: translateX(-50%) translateY(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(-50%) translateY(100px);
+        opacity: 0;
+    }
+}
+
+/* Add these styles */
+.video-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    z-index: 2000;
+    display: none;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.video-overlay.active {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 1;
+}
+
+#fullscreen-video {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+/* Update the find-btn styles */
+.find-btn {
+    position: relative;
+    padding: 15px 30px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: white;
+    background: var(--accent-color);
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    opacity: 0;
+    animation: 
+        buttonPop 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards 1.2s,
+        buttonPulse 2s infinite 2s;
+}
+
+.find-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.6s ease, height 0.6s ease;
+}
+
+.find-btn::after {
+    content: '♥';
+    position: absolute;
+    top: 50%;
+    left: -20px;
+    transform: translateY(-50%);
+    font-size: 1.2rem;
+    opacity: 0;
+    transition: all 0.4s ease;
+}
+
+.find-btn:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 10px 20px rgba(74, 18, 89, 0.2);
+    padding-left: 40px;
+}
+
+.find-btn:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+.find-btn:hover::after {
+    left: 15px;
+    opacity: 1;
+}
+
+.find-btn:active {
+    transform: translateY(-1px) scale(0.98) !important;
+    box-shadow: 0 5px 10px rgba(74, 18, 89, 0.3);
+}
+
+@keyframes buttonPop {
+    0% {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.1);
+        opacity: 0.7;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes buttonPulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(74, 18, 89, 0.4);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(74, 18, 89, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(74, 18, 89, 0);
+    }
+}
+
+/* Add styles for video notification */
+.video-notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 12px 20px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    color: var(--text-color);
+    font-size: 0.9rem;
+    z-index: 2001;
+    opacity: 0;
+    transform: translateX(100px);
+    transition: all 0.3s ease;
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.video-notification.show {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.video-notification-icon {
+    color: var(--accent-color);
+    font-size: 1.2rem;
+}
+
+/* Add fade animations for content */
+.text-content > * {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.8s ease forwards;
+}
+
+.text-content h1 { animation-delay: 0.3s; }
+.text-content .message { animation-delay: 0.6s; }
+.text-content .heartfelt-message { animation-delay: 0.9s; }
+
+.image-content {
+    opacity: 0;
+    transform: translateX(50px);
+    animation: fadeInRight 1s ease forwards 0.5s;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInRight {
+    from {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Enhance video overlay transition */
+.video-overlay {
+    background: rgba(0, 0, 0, 0.95);
+    backdrop-filter: blur(10px);
+}
+
+.video-overlay.active #fullscreen-video {
+    animation: videoScale 0.5s ease forwards;
+}
+
+@keyframes videoScale {
+    from {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
