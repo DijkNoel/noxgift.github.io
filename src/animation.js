@@ -146,3 +146,41 @@ videoOverlay.addEventListener('click', (e) => {
         closeVideo();
     }
 });
+
+// Replace createConfetti function with createFallingHearts
+function createFallingHearts() {
+    const hearts = ['💖', '💗', '💓', '💝', '💕'];
+    for(let i = 0; i < 20; i++) {
+        const heart = document.createElement('div');
+        heart.className = 'falling-heart';
+        heart.innerHTML = hearts[Math.floor(Math.random() * hearts.length)];
+        heart.style.left = Math.random() * 100 + 'vw';
+        heart.style.animationDelay = Math.random() * 3 + 's';
+        heart.style.fontSize = (Math.random() * 0.5 + 1) + 'rem';
+        document.body.appendChild(heart);
+        
+        // Remove heart after animation
+        heart.addEventListener('animationend', () => {
+            heart.remove();
+            createSingleHeart();
+        });
+    }
+}
+
+function createSingleHeart() {
+    const hearts = ['💖', '💗', '💓', '💝', '💕'];
+    const heart = document.createElement('div');
+    heart.className = 'falling-heart';
+    heart.innerHTML = hearts[Math.floor(Math.random() * hearts.length)];
+    heart.style.left = Math.random() * 100 + 'vw';
+    heart.style.fontSize = (Math.random() * 0.5 + 1) + 'rem';
+    document.body.appendChild(heart);
+    
+    heart.addEventListener('animationend', () => {
+        heart.remove();
+        createSingleHeart();
+    });
+}
+
+// Start creating hearts instead of confetti
+createFallingHearts();

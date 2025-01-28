@@ -12,6 +12,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.0/lottie.min.js"></script>
 </head>
 <body class="loading">
+    <div class="ribbon"></div>
+
     <svg class="corner-heart top-left" width="200" height="200" viewBox="0 0 800 800">
         <path d="M400 632C400 632 140 456 140 302C140 194 228 140 310 140C364 140 400 170 400 170C400 170 436 140 490 140C572 140 660 194 660 302C660 456 400 632 400 632Z" fill="#4a125922"/>
     </svg>
@@ -24,6 +26,10 @@
         <div class="content">
             <div class="text-content">
                 <h1>ALL U<br>NEED IS<br><span class="highlight">LOVE</span> </h1>
+                <div class="sparkle"></div>
+                <div class="sparkle"></div>
+                <div class="sparkle"></div>
+                <div class="sparkle"></div>
                 <p class="message">
                     Like spider lilies that bloom in autumn,<br>
                     Some moments are fleeting yet beautiful.
@@ -35,6 +41,10 @@
             </div>
             <div class="image-content">
                 <img src="images/couple.png" alt="Couple illustration" class="main-image">
+                <span class="floating-heart">♥</span>
+                <span class="floating-heart">♥</span>
+                <span class="floating-heart">♥</span>
+                <span class="floating-heart">♥</span>
             </div>
         </div>
     </div>
@@ -69,5 +79,135 @@
         <span class="video-notification-icon">⌨️</span>
         <span>Press ESC to close video</span>
     </div>
+
+    <div class="love-meter">
+        <span>Love Level:</span>
+        <div class="love-meter-bar">
+            <div class="love-meter-fill"></div>
+        </div>
+        <span>100%</span>
+    </div>
+
+    <div class="birthday-balloon">🎈</div>
+    <div class="birthday-balloon">🎈</div>
+    <div class="birthday-balloon">🎈</div>
+    <div class="birthday-balloon">🎈</div>
+
+    <div class="cake-sparkle">🎂✨</div>
+    <div class="cake-sparkle">🎁✨</div>
+
+    <div class="emoji-float">🌸</div>
+    <div class="emoji-float">✨</div>
+    <div class="emoji-float">💫</div>
+    <div class="emoji-float">💝</div>
+
+    <div class="floating-emoji">🦋</div>
+    <div class="floating-emoji">🌟</div>
+    <div class="floating-emoji">🎀</div>
+    <div class="floating-emoji">✨</div>
+
+    <div class="corner-decoration top-right"></div>
+    <div class="corner-decoration bottom-left"></div>
+
+    <script>
+    function createBubbles() {
+        const bubbleCount = 10;
+        for(let i = 0; i < bubbleCount; i++) {
+            const bubble = document.createElement('div');
+            bubble.className = 'bubble';
+            
+            // Random size between 20 and 60 pixels
+            const size = Math.random() * 40 + 20;
+            bubble.style.width = `${size}px`;
+            bubble.style.height = `${size}px`;
+            
+            // Random position
+            bubble.style.left = `${Math.random() * 100}%`;
+            
+            // Random delay
+            bubble.style.animationDelay = `${Math.random() * 15}s`;
+            
+            document.body.appendChild(bubble);
+            
+            // Remove bubble after animation
+            bubble.addEventListener('animationend', () => {
+                bubble.remove();
+                createBubble(); // Create a new bubble
+            });
+        }
+    }
+
+    function createBubble() {
+        const bubble = document.createElement('div');
+        bubble.className = 'bubble';
+        const size = Math.random() * 40 + 20;
+        bubble.style.width = `${size}px`;
+        bubble.style.height = `${size}px`;
+        bubble.style.left = `${Math.random() * 100}%`;
+        document.body.appendChild(bubble);
+        
+        bubble.addEventListener('animationend', () => {
+            bubble.remove();
+            createBubble();
+        });
+    }
+
+    // Start creating bubbles when the page loads
+    createBubbles();
+
+    // Add heart trail effect
+    document.addEventListener('mousemove', (e) => {
+        if (Math.random() > 0.9) { // Only create hearts sometimes
+            const heart = document.createElement('div');
+            heart.className = 'heart-trail';
+            heart.innerHTML = '♥';
+            heart.style.left = e.pageX + 'px';
+            heart.style.top = e.pageY + 'px';
+            document.body.appendChild(heart);
+            
+            // Remove heart after animation
+            setTimeout(() => {
+                heart.remove();
+            }, 1000);
+        }
+    });
+
+    // Create falling hearts
+    function createFallingHearts() {
+        const hearts = ['💖', '💗', '💓', '💝', '💕'];
+        for(let i = 0; i < 20; i++) {
+            const heart = document.createElement('div');
+            heart.className = 'falling-heart';
+            heart.innerHTML = hearts[Math.floor(Math.random() * hearts.length)];
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDelay = Math.random() * 3 + 's';
+            heart.style.fontSize = (Math.random() * 0.5 + 1) + 'rem';
+            document.body.appendChild(heart);
+            
+            heart.addEventListener('animationend', () => {
+                heart.remove();
+                createSingleHeart();
+            });
+        }
+    }
+
+    function createSingleHeart() {
+        const hearts = ['💖', '💗', '💓', '💝', '💕'];
+        const heart = document.createElement('div');
+        heart.className = 'falling-heart';
+        heart.innerHTML = hearts[Math.floor(Math.random() * hearts.length)];
+        heart.style.left = Math.random() * 100 + 'vw';
+        heart.style.fontSize = (Math.random() * 0.5 + 1) + 'rem';
+        document.body.appendChild(heart);
+        
+        heart.addEventListener('animationend', () => {
+            heart.remove();
+            createSingleHeart();
+        });
+    }
+
+    // Start creating hearts
+    createFallingHearts();
+    </script>
 </body>
 </html>
