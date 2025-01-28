@@ -1,8 +1,10 @@
 :root {
-    --accent-color: #4a1259;
-    --text-color: #333;
-    --light-text: #666;
-    --background-color: #ffffff;
+    --accent-color: #FF69B4;
+    --text-color: #4A4A4A;
+    --light-text: #777;
+    --background-color: #FFF5F7;
+    --gradient-1: linear-gradient(135deg, #FF69B4, #FFB6C1);
+    --shadow-color: rgba(255, 105, 180, 0.2);
 }
 
 body {
@@ -10,10 +12,11 @@ body {
     padding: 0;
     min-height: 100vh;
     background-color: var(--background-color);
-    background-image: url('../images/big-heart.svg');
-    background-size: 1200px;
-    background-position: right -100px center;
-    background-repeat: no-repeat;
+    background-image: 
+        url('../images/big-heart.svg'),
+        radial-gradient(circle at top right, rgba(255, 182, 193, 0.15), transparent 60%),
+        radial-gradient(circle at bottom left, rgba(255, 105, 180, 0.1), transparent 60%);
+    background-blend-mode: soft-light;
     font-family: 'Poppins', sans-serif;
     color: var(--text-color);
     overflow-x: hidden;
@@ -22,7 +25,8 @@ body {
 
 .corner-heart {
     position: fixed;
-    opacity: 0.8;
+    opacity: 0.6;
+    filter: drop-shadow(0 0 10px var(--shadow-color));
     z-index: -1;
 }
 
@@ -38,6 +42,10 @@ body {
     right: -50px;
     transform: rotate(15deg);
     animation: floatBottomRight 6s ease-in-out infinite;
+}
+
+.corner-heart path {
+    fill: #FF69B4;
 }
 
 @keyframes floatTopLeft {
@@ -91,6 +99,10 @@ h1 {
     padding: 1rem 0;
     text-align: left;
     width: 450px;
+    background: var(--gradient-1);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 2px 2px 4px var(--shadow-color);
 }
 
 .highlight {
@@ -101,12 +113,10 @@ h1 {
 
 .highlight::after {
     content: '♥';
-    position: absolute;
-    font-size: 2rem;
-    right: -30px;
-    top: 10px;
-    color: var(--accent-color);
-    animation: pulse 1.5s ease-in-out infinite;
+    font-size: 2.5rem;
+    color: #FF69B4;
+    text-shadow: 0 0 15px var(--shadow-color);
+    animation: heartbeat 1.5s ease-in-out infinite;
 }
 
 .message {
@@ -117,16 +127,22 @@ h1 {
     color: var(--light-text);
     margin: 3rem 0;
     max-width: 80%;
+    font-style: italic;
+    color: var(--accent-color);
+    text-shadow: 0 0 2px var(--shadow-color);
 }
 
 .heartfelt-message {
-    font-style: italic;
-    color: var(--accent-color);
     margin-top: 2rem;
     margin-bottom: 3rem;
     max-width: 80%;
     font-size: 1.1rem;
     opacity: 0.9;
+    background: linear-gradient(120deg, rgba(255, 105, 180, 0.1) 0%, rgba(255, 182, 193, 0.1) 100%);
+    padding: 1.5rem;
+    border-radius: 15px;
+    border-left: 4px solid var(--accent-color);
+    box-shadow: 0 4px 15px var(--shadow-color);
 }
 
 /* Updated Music Player Styles */
@@ -135,20 +151,20 @@ h1 {
     bottom: 2rem;
     left: 50%;
     transform: translateX(-50%);
-    background: rgba(255, 255, 255, 0.95);
+    background: rgba(255, 255, 255, 0.9);
     padding: 1.2rem 2rem;
     border-radius: 50px;
-    box-shadow: 0 5px 20px rgba(74, 18, 89, 0.15);
+    box-shadow: 0 5px 20px var(--shadow-color);
     display: flex;
     align-items: center;
     gap: 1.5rem;
     backdrop-filter: blur(10px);
-    border: 1px solid rgba(74, 18, 89, 0.1);
+    border: 1px solid rgba(255, 105, 180, 0.2);
     animation: slideUp 0.8s ease forwards;
 }
 
 .control-btn {
-    background: var(--accent-color);
+    background: var(--gradient-1);
     border: none;
     border-radius: 50%;
     width: 45px;
@@ -158,6 +174,7 @@ h1 {
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
+    box-shadow: 0 4px 10px var(--shadow-color);
 }
 
 .control-btn::before {
@@ -177,7 +194,7 @@ h1 {
 
 .control-btn:hover {
     transform: scale(1.1);
-    box-shadow: 0 0 15px rgba(74, 18, 89, 0.3);
+    box-shadow: 0 6px 15px var(--shadow-color);
 }
 
 #volume {
@@ -211,9 +228,12 @@ h1 {
     }
 }
 
-@keyframes pulse {
+@keyframes heartbeat {
     0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.2); }
+    10% { transform: scale(1.2); }
+    20% { transform: scale(1.1); }
+    30% { transform: scale(1.2); }
+    40% { transform: scale(1); }
 }
 
 .hidden {
@@ -226,15 +246,15 @@ h1 {
     bottom: 120px;
     left: 50%;
     transform: translateX(-50%) translateY(100px);
-    background: rgba(255, 255, 255, 0.98);
+    background: rgba(255, 255, 255, 0.95);
     padding: 1.2rem 2rem;
     border-radius: 15px;
-    box-shadow: 0 5px 20px rgba(74, 18, 89, 0.15);
+    box-shadow: 0 5px 20px var(--shadow-color);
     display: flex;
     align-items: center;
     gap: 1rem;
     backdrop-filter: blur(10px);
-    border: 1px solid rgba(74, 18, 89, 0.1);
+    border: 1px solid rgba(255, 105, 180, 0.3);
     opacity: 0;
     z-index: 1000;
     pointer-events: none;
@@ -252,6 +272,7 @@ h1 {
 .notification-icon {
     color: var(--accent-color);
     font-size: 1.5rem;
+    animation: pulse 2s infinite;
 }
 
 .notification-text {
@@ -330,17 +351,17 @@ h1 {
 /* Update the find-btn styles */
 .find-btn {
     position: relative;
-    padding: 15px 30px;
+    padding: 1rem 2rem;
     font-family: 'Poppins', sans-serif;
     font-size: 1.1rem;
-    font-weight: 500;
+    font-weight: 600;
     color: white;
-    background: var(--accent-color);
+    background: var(--gradient-1);
     border: none;
     border-radius: 50px;
     cursor: pointer;
     overflow: hidden;
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transition: all 0.3s ease;
     opacity: 0;
     animation: 
         buttonPop 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards 1.2s,
@@ -348,42 +369,21 @@ h1 {
 }
 
 .find-btn::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 0;
-    height: 0;
-    background: rgba(255, 255, 255, 0.2);
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-    transition: width 0.6s ease, height 0.6s ease;
-}
-
-.find-btn::after {
     content: '♥';
     position: absolute;
-    top: 50%;
     left: -20px;
-    transform: translateY(-50%);
-    font-size: 1.2rem;
     opacity: 0;
-    transition: all 0.4s ease;
+    transition: all 0.3s ease;
 }
 
 .find-btn:hover {
-    transform: translateY(-3px) scale(1.02);
-    box-shadow: 0 10px 20px rgba(74, 18, 89, 0.2);
-    padding-left: 40px;
+    transform: translateY(-3px);
+    padding-left: 2.5rem;
+    box-shadow: 0 8px 20px var(--shadow-color);
 }
 
 .find-btn:hover::before {
-    width: 300px;
-    height: 300px;
-}
-
-.find-btn:hover::after {
-    left: 15px;
+    left: 1rem;
     opacity: 1;
 }
 
@@ -509,4 +509,44 @@ h1 {
         transform: scale(1);
         opacity: 1;
     }
+}
+
+/* Add floating hearts animation */
+@keyframes floatingHeart {
+    0% { transform: translateY(0) rotate(0); }
+    50% { transform: translateY(-10px) rotate(5deg); }
+    100% { transform: translateY(0) rotate(0); }
+}
+
+.image-content::before,
+.image-content::after {
+    content: '♥';
+    position: absolute;
+    color: var(--accent-color);
+    opacity: 0.2;
+    font-size: 2rem;
+    animation: floatingHeart 3s ease-in-out infinite;
+}
+
+.image-content::before {
+    top: 20%;
+    right: 10%;
+    animation-delay: 0.5s;
+}
+
+.image-content::after {
+    bottom: 30%;
+    left: 10%;
+    animation-delay: 1s;
+}
+
+/* Add sparkle effect to the main image */
+.main-image {
+    filter: drop-shadow(0 5px 15px var(--shadow-color));
+    transition: all 0.3s ease;
+}
+
+.main-image:hover {
+    transform: scale(1.02);
+    filter: drop-shadow(0 8px 25px var(--shadow-color));
 }
