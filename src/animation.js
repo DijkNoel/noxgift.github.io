@@ -91,7 +91,7 @@ controlBtn.addEventListener('mouseleave', () => {
     musicPlayer.style.transform = 'translateX(-50%) scale(1)';
 });
 
-// Add this to your existing JavaScript
+// Update video click handler
 const findBtn = document.querySelector('.find-btn');
 const videoOverlay = document.querySelector('.video-overlay');
 const video = document.querySelector('#fullscreen-video');
@@ -101,50 +101,37 @@ findBtn.addEventListener('click', () => {
     videoOverlay.classList.add('active');
     video.play();
     
-    // Show notification
+    // Show notification after a short delay
     setTimeout(() => {
         videoNotification.classList.add('show');
-    }, 1000);
-
-    // Hide notification after 4 seconds
-    setTimeout(() => {
-        videoNotification.classList.remove('show');
-    }, 5000);
-    
-    // Disable music if it's playing
-    if (!audio.paused) {
-        audio.pause();
-        playIcon.classList.remove('hidden');
-        pauseIcon.classList.add('hidden');
-    }
+    }, 500);
 });
 
-// Function to close video
+// Function to close video and hide notification
 function closeVideo() {
+    videoOverlay.classList.remove('active');
     video.pause();
     video.currentTime = 0;
-    videoOverlay.style.opacity = '0';
     videoNotification.classList.remove('show');
-    setTimeout(() => {
-        videoOverlay.classList.remove('active');
-        videoOverlay.style.opacity = '';
-    }, 500);
 }
 
-video.addEventListener('ended', closeVideo);
-
-// Update keyboard support
+// Close video on ESC key
 document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && videoOverlay.classList.contains('active')) {
         closeVideo();
     }
 });
 
-// Add video overlay click to close
+// Close video on overlay click
 videoOverlay.addEventListener('click', (e) => {
     if (e.target === videoOverlay) {
         closeVideo();
     }
+});
+
+// Hide notification when video ends
+video.addEventListener('ended', () => {
+    closeVideo();
 });
 
 // Replace createConfetti function with createFallingHearts

@@ -29,10 +29,7 @@ body {
     font-family: 'Poppins', sans-serif;
     color: var(--text-color);
     overflow-x: hidden;
-    overflow: hidden;
-    cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="%239B4DCA"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>') 12 12, auto;
-    overscroll-behavior: none;
-    position: fixed;
+    position: relative;
     width: 100%;
     height: 100%;
 }
@@ -74,26 +71,27 @@ body {
 
 .container {
     position: relative;
-    width: 100%;
     min-height: 100vh;
-    display: flex;
-    padding: 3rem;
+    padding: 4rem 1rem;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
 }
 
 .content {
     max-width: 1200px;
-    margin: auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 4rem;
-    padding: 2rem;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+    min-height: calc(100vh - 200px);
+    position: relative;
+    z-index: 2;
 }
 
 .text-content {
     flex: 1;
     padding-right: 2rem;
     margin-left: 4%;
+    position: relative;
+    z-index: 3;
 }
 
 .image-content {
@@ -102,6 +100,8 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
+    z-index: 3;
 }
 
 h1 {
@@ -154,76 +154,29 @@ h1 {
 /* Updated Music Player Styles */
 .music-player {
     position: fixed;
-    bottom: 2.5rem;
+    bottom: 2rem;
     left: 50%;
     transform: translateX(-50%);
-    padding: 1rem 2rem;
-    background: rgba(255, 255, 255, 0.95);
-    border-radius: 50px;
-    box-shadow: 0 5px 20px var(--shadow-color);
+    padding: 0.8rem 1.5rem;
+    width: auto;
+    max-width: 90%;
     display: flex;
     align-items: center;
-    gap: 1.5rem;
-    backdrop-filter: blur(10px);
-    z-index: 100;
+    gap: 1rem;
+    z-index: 1999;
 }
 
 .control-btn {
-    background: var(--gradient-1);
-    border: none;
-    border-radius: 50%;
-    width: 45px;
-    height: 45px;
-    color: white;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
-    box-shadow: 0 4px 10px rgba(155, 77, 202, 0.3);
-}
-
-.control-btn::before {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: rgba(255, 255, 255, 0.1);
-    top: 0;
-    left: -100%;
-    transition: all 0.3s ease;
-}
-
-.control-btn:hover::before {
-    left: 0;
-}
-
-.control-btn:hover {
-    transform: scale(1.1);
-    box-shadow: 0 6px 15px rgba(155, 77, 202, 0.4);
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
 }
 
 #volume {
-    width: 120px;
-    height: 5px;
-    accent-color: var(--accent-color);
-    cursor: pointer;
-    -webkit-user-select: auto;
-    -moz-user-select: auto;
-    -ms-user-select: auto;
-    user-select: auto;
-}
-
-#volume::-webkit-slider-thumb {
-    width: 15px;
-    height: 15px;
-    background: var(--accent-color);
-    border-radius: 50%;
-    cursor: pointer;
-    transition: transform 0.2s ease;
-}
-
-#volume::-webkit-slider-thumb:hover {
-    transform: scale(1.2);
+    width: 100px;
+    flex-shrink: 1;
+    min-width: 60px;
+    max-width: 120px;
 }
 
 @keyframes slideUp {
@@ -265,7 +218,7 @@ h1 {
     backdrop-filter: blur(10px);
     border: 1px solid rgba(155, 77, 202, 0.3);
     opacity: 0;
-    z-index: 100;
+    z-index: 1998;
     pointer-events: none;
     width: auto;
     max-width: none;
@@ -340,7 +293,7 @@ h1 {
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.9);
-    z-index: 2000;
+    z-index: 2001;
     display: none;
     opacity: 0;
     transition: opacity 0.5s ease;
@@ -357,6 +310,7 @@ h1 {
     max-width: 100%;
     max-height: 100%;
     object-fit: contain;
+    z-index: 2002;
 }
 
 /* Update the find-btn styles */
@@ -431,34 +385,27 @@ h1 {
     }
 }
 
-/* Add styles for video notification */
+/* Update video notification styles */
 .video-notification {
     position: fixed;
-    top: auto;
     bottom: 140px;
-    right: 50%;
-    transform: translateX(50%);
-    width: auto;
+    left: 50%;
+    transform: translateX(-50%);
     background: rgba(255, 255, 255, 0.95);
     padding: 12px 20px;
     border-radius: 10px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-    color: var(--text-color);
-    font-size: 0.9rem;
-    z-index: 2001;
-    opacity: 0;
-    transform: translateX(100px);
-    transition: all 0.3s ease;
     backdrop-filter: blur(5px);
-    border: 1px solid rgba(155, 77, 202, 0.2);
-    display: flex;
-    align-items: center;
-    gap: 10px;
+    z-index: 2500;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    pointer-events: none;
 }
 
 .video-notification.show {
     opacity: 1;
-    transform: translateX(0);
+    visibility: visible;
 }
 
 .video-notification-icon {
@@ -631,43 +578,78 @@ h1 {
 .floating-heart:nth-child(3) { bottom: 20%; left: -20px; animation: float-heart 3s ease-in-out infinite 1s; }
 .floating-heart:nth-child(4) { bottom: 40%; right: -20px; animation: float-heart 3s ease-in-out infinite 1.5s; }
 
-/* Update love meter position */
+/* Update love meter styles */
 .love-meter {
     position: fixed;
-    bottom: auto; /* Remove bottom positioning */
-    top: 0; /* Position at top */
-    margin-top: 20px; /* Add top margin */
+    z-index: 2000;
+    top: 20px;
     left: 50%;
     transform: translateX(-50%);
-    padding: 0.5rem 1rem;
-    border-radius: 20px;
-    box-shadow: 0 2px 10px var(--shadow-color);
+    background: rgba(255, 255, 255, 0.95);
+    padding: 8px 20px;
+    border-radius: 30px;
+    box-shadow: 0 2px 15px rgba(155, 77, 202, 0.15);
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    opacity: 0.8;
-    z-index: 1000; /* Ensure it stays above other elements */
+    gap: 12px;
+    font-size: 0.9rem;
+    color: var(--text-color);
+    min-width: 220px;
 }
 
 .love-meter-bar {
-    width: 100px;
+    flex: 1;
     height: 4px;
-    background: rgba(155, 77, 202, 0.2);
+    background: rgba(155, 77, 202, 0.1);
     border-radius: 2px;
     overflow: hidden;
+    position: relative;
 }
 
 .love-meter-fill {
-    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
     height: 100%;
-    background: var(--gradient-1);
-    animation: fill-love 2s ease-in-out forwards;
+    width: 100%;
+    background: var(--accent-color);
     transform-origin: left;
+    animation: fillBar 2s ease-out forwards;
 }
 
-@keyframes fill-love {
-    0% { transform: scaleX(0); }
-    100% { transform: scaleX(1); }
+@keyframes fillBar {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
+}
+
+/* Mobile adjustments */
+@media screen and (max-width: 768px) {
+    .love-meter {
+        top: 15px;
+        padding: 6px 15px;
+        min-width: 180px;
+        font-size: 0.85rem;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .love-meter {
+        top: 10px;
+        padding: 5px 12px;
+        min-width: 160px;
+        font-size: 0.8rem;
+        gap: 8px;
+    }
+}
+
+/* Remove previous hover effects */
+.love-meter:hover {
+    transform: translateX(-50%);
+    background: rgba(255, 255, 255, 0.95);
+}
+
+.love-meter-fill {
+    animation: fillBar 2s ease-out forwards;
 }
 
 /* Update notification stacking */
@@ -721,87 +703,49 @@ img {
     text-align: left;
 }
 
-/* Add responsive breakpoints */
+/* Update responsive styles */
 @media screen and (max-width: 1200px) {
-    .container {
-        padding: 2rem;
-    }
-
-    .content {
-        gap: 3rem;
-    }
-
-    h1 {
-        font-size: 4rem;
-        width: auto;
-    }
-}
-
-@media screen and (max-width: 992px) {
     .content {
         flex-direction: column;
         text-align: center;
-        gap: 2rem;
+        padding: 2rem 1rem;
     }
 
     .text-content {
         padding-right: 0;
         margin-left: 0;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 
-    .text-content > * {
+    h1 {
+        font-size: 4rem;
+        width: 100%;
         text-align: center;
-        margin-left: auto;
-        margin-right: auto;
+        margin-bottom: 1.5rem;
+    }
+
+    .message, .heartfelt-message {
+        width: 90%;
+        margin: 1rem auto;
     }
 
     .image-content {
         width: 80%;
         max-width: 500px;
-    }
-
-    .main-image {
-        width: 100%;
+        margin: 0 auto;
     }
 }
 
 @media screen and (max-width: 768px) {
     .container {
-        padding: 1.5rem;
+        padding: 3rem 1rem 6rem 1rem;
     }
 
     h1 {
         font-size: 3rem;
-    }
-
-    .image-content {
-        width: 90%;
-    }
-
-    .music-player {
-        bottom: 1.5rem;
-        padding: 0.8rem 1.5rem;
-    }
-
-    .notification {
-        bottom: 90px;
-        width: 85%;
-    }
-
-    .love-meter {
-        margin-top: 15px;
-        padding: 0.4rem 0.8rem;
-        font-size: 0.9rem;
-    }
-}
-
-@media screen and (max-width: 480px) {
-    .container {
-        padding: 1rem;
-    }
-
-    h1 {
-        font-size: 2.5rem;
     }
 
     .message {
@@ -809,30 +753,85 @@ img {
     }
 
     .heartfelt-message {
-        font-size: 0.9rem;
+        font-size: 0.95rem;
     }
 
     .image-content {
-        width: 95%;
+        width: 90%;
     }
 
     .music-player {
-        width: 90%;
-        padding: 0.7rem 1rem;
+        padding: 0.7rem 1.2rem;
+        gap: 0.8rem;
+    }
+
+    .control-btn {
+        width: 35px;
+        height: 35px;
+    }
+
+    #volume {
+        width: 80px;
+        min-width: 50px;
+    }
+
+    .video-notification {
+        bottom: 120px;
+        padding: 10px 15px;
+        font-size: 0.85rem;
+    }
+
+    /* Reduce number of floating elements on mobile */
+    .floating-emoji:nth-child(odd),
+    .emoji-float:nth-child(odd),
+    .birthday-balloon:nth-child(odd),
+    .cake-sparkle:nth-child(odd) {
+        display: none;
+    }
+
+    /* Adjust positions for better mobile display */
+    .floating-emoji:nth-child(2) { top: 15%; right: 5%; }
+    .floating-emoji:nth-child(4) { bottom: 25%; left: 5%; }
+    
+    .emoji-float:nth-child(2) { top: 20%; left: 5%; }
+    .emoji-float:nth-child(4) { bottom: 30%; right: 5%; }
+}
+
+@media screen and (max-width: 480px) {
+    h1 {
+        font-size: 2.5rem;
+    }
+
+    .message, .heartfelt-message {
+        width: 95%;
+        padding: 1rem;
+    }
+
+    .find-btn {
+        padding: 0.8rem 1.5rem;
+        font-size: 0.9rem;
+    }
+
+    .music-player {
+        padding: 0.6rem 1rem;
+        gap: 0.6rem;
+        bottom: 1rem;
+    }
+
+    .control-btn {
+        width: 32px;
+        height: 32px;
     }
 
     #volume {
         width: 60px;
+        min-width: 40px;
     }
 
-    .love-meter {
-        margin-top: 10px;
-        padding: 0.3rem 0.6rem;
+    .video-notification {
+        bottom: 100px;
+        padding: 8px 12px;
         font-size: 0.8rem;
-    }
-    
-    .love-meter-bar {
-        width: 60px;
     }
 }
 
@@ -849,21 +848,34 @@ img {
     transition: all 0.3s ease-in-out;
 }
 
-/* Ensure proper stacking */
-.notification,
+/* Fix stacking context */
 .music-player,
+.notification,
+.video-notification,
 .love-meter {
-    z-index: 100;
+    z-index: 1000;
 }
 
-/* Fix overflow issues */
-body {
-    overflow-x: hidden;
+/* Ensure content is scrollable on mobile */
+@media (max-height: 700px) {
+    .container {
+        padding-bottom: 8rem;
+    }
+
+    .content {
+        min-height: auto;
+    }
+
+    .music-player {
+        bottom: 1rem;
+    }
 }
 
-.container {
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
+/* Fix button display on mobile */
+.find-btn {
+    margin: 1rem 0;
+    white-space: nowrap;
+    min-width: 200px;
 }
 
 /* Add floating emoji animations */
@@ -934,10 +946,6 @@ body {
     100% { filter: hue-rotate(360deg); }
 }
 
-/* Add cute pulse to button */
-
-
-
 /* Add heart trail to cursor */
 .heart-trail {
     position: fixed;
@@ -982,6 +990,7 @@ body {
     height: 100px;
     pointer-events: none;
     opacity: 0.8;
+    z-index: 1;
 }
 
 .corner-decoration::before {
@@ -1132,4 +1141,33 @@ h1 .highlight {
 
 ::-webkit-scrollbar-thumb:hover {
     background: linear-gradient(45deg, #9B4DCA, #FF69B4);
+}
+
+/* Fix floating elements to viewport */
+.floating-emoji,
+.emoji-float,
+.birthday-balloon,
+.cake-sparkle,
+.falling-heart {
+    position: fixed;
+    pointer-events: none;
+}
+
+/* Fix falling hearts */
+.falling-heart {
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* Ensure notifications stay on top */
+.notification,
+.video-notification {
+    z-index: 1001;
+}
+
+/* Adjust main content area */
+.text-content,
+.image-content {
+    position: relative;
+    z-index: 3;
 }
